@@ -491,7 +491,7 @@ class ProgressDialog @JvmOverloads constructor(
      */
     fun dismiss()
     {
-        if (progressDialog.isShowing && progressDialog.ownerActivity != null && !progressDialog.ownerActivity!!.isFinishing) {
+        if (progressDialog.isShowing || progressDialog.ownerActivity?.isFinishing == false) {
             progressDialog.dismiss()
         }
     }
