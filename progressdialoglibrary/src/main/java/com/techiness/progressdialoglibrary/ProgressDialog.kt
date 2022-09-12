@@ -230,6 +230,7 @@ class ProgressDialog @JvmOverloads constructor(
     {
         return if (isDeterminate) binding.progressbarDeterminate.progress else -1
     }
+    @RequiresApi(Build.VERSION_CODES.N)
     @Throws(UnsupportedOperationException::class)
     set(progressValue)
     {
@@ -383,6 +384,7 @@ class ProgressDialog @JvmOverloads constructor(
     {
         return if (isDeterminate) binding.progressbarDeterminate.max else -1
     }
+    @RequiresApi(Build.VERSION_CODES.N)
     @Throws(UnsupportedOperationException::class)
     set(maxValue)
     {
@@ -489,7 +491,9 @@ class ProgressDialog @JvmOverloads constructor(
      */
     fun dismiss()
     {
-        progressDialog.dismiss()
+        if (progressDialog.isShowing && progressDialog.ownerActivity != null && !progressDialog.ownerActivity!!.isFinishing) {
+            progressDialog.dismiss()
+        }
     }
 
     /**
